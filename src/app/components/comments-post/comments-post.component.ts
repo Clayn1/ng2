@@ -9,7 +9,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CommentsPostComponent implements OnInit {
 
-  post: PostModel[];
+  post: PostModel;
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute
