@@ -1,7 +1,4 @@
-<a routerLink='/'>To main page</a>
-<h1>"{{user.username}}" {{user.name}}</h1>
-<div *ngFor="let post of user.posts">
-  <h2><a routerLink='/post/{{post.id}}'>{{post.title}}</a></h2>
-  <h4>{{post.body}}</h4>
-</div>
+<h1>{{user.id}} "{{user.username}}" {{user.name}}</h1>
+<button (click)="navigate(user)">Show Posts</button>
+
 

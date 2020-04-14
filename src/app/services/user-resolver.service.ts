@@ -12,6 +12,10 @@ export class UserResolverService implements Resolve<UserModel[]>{
   constructor(private userService: UserService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserModel[]> {
-    return this.userService.getUsers();
+    if (route.paramMap.get('id')){
+      return this.userService.getUser(route.paramMap.get('id'));
+    }else{
+      return this.userService.getUsers();
+    }
   }
 }

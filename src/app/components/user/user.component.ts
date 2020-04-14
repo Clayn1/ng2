@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserModel} from '../../../models/UserModel';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PostModel} from '../../../models/PostModel';
 
 @Component({
@@ -12,20 +12,17 @@ export class UserComponent implements OnInit {
   @Input()
   user: UserModel;
 
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.user = this.activatedRoute.snapshot.data.allUsers[+this.activatedRoute.snapshot.url[1].path - 1];
-    const posts = this.activatedRoute.snapshot.data.allPosts;
-    const userPosts = [];
-    for (const post of posts) {
-      if (post.userId === this.user.id) {
-        userPosts.push(post);
-      }
-    }
-    this.user.posts = userPosts;
-    console.log(this.user.posts);
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
+  navigate(user: UserModel) {
+    this.router.navigate([user.id, 'posts'], {
+      state: {user},
+      relativeTo: this.activatedRoute
+    });
+  }
 }

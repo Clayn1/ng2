@@ -12,8 +12,11 @@ export class CommentResolverService implements Resolve<CommentModel[]>{
   constructor(private commentService: CommentService) {
   }
 
-  // tslint:disable-next-line:max-line-length
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<CommentModel[]> {
-    return this.commentService.getComments();
+    if (route.paramMap.get('id')){
+      return this.commentService.getComment(route.paramMap.get('id'));
+    }else{
+      return this.commentService.getComments();
+    }
   }
 }
